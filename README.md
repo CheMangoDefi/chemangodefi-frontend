@@ -1,6 +1,8 @@
 # <img src="public/logo.png" alt="CheMango Logo" width="100" style="vertical-align:middle;"> CheMango DeFi
 
-> **Invest together, with real control.**
+<br />
+>
+ **Invest together, with real control.**
 
 ---
 
