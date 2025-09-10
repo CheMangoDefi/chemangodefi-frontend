@@ -13,7 +13,7 @@ CheMango DeFi is a playful, trustworthy, and finance-oriented web app for collab
 
 - `app/` – Next.js app directory (pages, layout, global styles)
 - `app/components/sections/` – All major landing page sections as isolated React components
-- `context/` – Contains `style-guide.md` and `design-principles.md` (see below)
+- `context/` – Contains `style-guide.md`, `landing-page-design.md` and `design-principles.md` (see below)
 - `public/` – Static assets (logo, mascot, images)
 
 ---
@@ -90,7 +90,7 @@ CheMango DeFi is a playful, trustworthy, and finance-oriented web app for collab
 
 **When generating or changing code, Claude must:**
 
-1. **Consult both `@context/style-guide.md` and `@context/design-principles.md` before any code change.**
+1. **Consult both `@context/style-guide.md`,s `@context/landing-page-design.md` and `@context/design-principles.md` before any code change.**
 2. **Preserve the playful, trustworthy, and finance-oriented brand tone.**
 3. **Never break the visual or UX consistency described above.**
 4. **Always use the correct color palette, typography, and spacing.**

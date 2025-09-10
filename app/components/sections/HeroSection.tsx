@@ -106,7 +106,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="relative z-10 text-6xl sm:text-7xl lg:text-8xl font-black text-white leading-tight mb-6 pt-12 sm:pt-16 lg:pt-20"
             style={{
-              textShadow: '3px 3px 0px rgba(0,0,0,1), -1px -1px 0px rgba(0,0,0,1), 1px -1px 0px rgba(0,0,0,1), -1px 1px 0px rgba(0,0,0,1), 0 4px 8px rgba(0,0,0,0.3)'
+              textShadow: '6px 6px 0px rgba(0,0,0,1), -1px -1px 0px rgba(0,0,0,1), 1px -1px 0px rgba(0,0,0,1), -1px 1px 0px rgba(0,0,0,1), 0 4px 8px rgba(0,0,0,0.3)'
             }}
           >
             CheMango DeFi
