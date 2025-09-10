@@ -7,27 +7,27 @@ export default function ValuePropositionSection() {
   const features = [
     {
       icon: ShieldCheckIcon,
-      title: "Bank-Grade Security",
-      description: "Multi-signature wallets and smart contract audits protect your investments with military-grade security.",
+      title: "Seguridad de grado militar",
+      description: "Wallets multisig y smart contracts auditados protejen tus inversiones con la más alta seguridad.",
       gradient: "from-orange-500 to-amber-400"
     },
     {
       icon: UsersIcon,
-      title: "Democratic Decisions",
-      description: "Clear approval workflows ensure every group member has a voice in investment decisions - no more financial drama.",
-      gradient: "from-amber-400 to-green-500"
+      title: "Decisiones en conjunto",
+      description: "Flujos de aprobación claros aeguran que cada miembro tenga voz en las deciciones financieras.",
+      gradient: "from-green-500 to-emerald-400"
     },
     {
       icon: CogIcon,
-      title: "Smart Automation",
-      description: "Intelligent strategies handle the complex stuff while you focus on what matters - growing your wealth together.",
+      title: "Automatización inteligente",
+      description: "Estrategias inteligentes manejan los procesos complejos para que te enfoques en lo que importa - hacer crecer tu plata juntos.",
       gradient: "from-green-500 to-emerald-400"
     },
     {
       icon: ArrowTrendingUpIcon,
-      title: "Optimized Returns",
-      description: "Advanced DeFi strategies maximize your returns with minimal effort and maximum transparency for the whole group.",
-      gradient: "from-emerald-400 to-orange-500"
+      title: "Retornos optimizados",
+      description: "Estrategias DeFi avanzadas maximizan tus retornos con el mínimo esfuerzo y la máxima transparencia para el grupo completo.",
+      gradient: "from-orange-500 to-amber-400"
     }
   ];
 
@@ -63,15 +63,15 @@ export default function ValuePropositionSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6" style={{ color: '#454545' }}>
-            Why Choose{' '}
+            Por qué elegir{' '}
             <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-green-500 bg-clip-text text-transparent">
               CheMango
             </span>
             ?
           </h2>
-          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#454545' }}>
-            Stop improvising with group investments. Get the security, transparency, 
-            and smart strategies your money deserves.
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed text-pretty" style={{ color: '#454545' }}>
+            Juntá a tu grupo, poné una meta y a ahorrar! Obtené la seguridad, transparencia, 
+            y estrategias inteligentes que tu plata merece.
           </p>
         </motion.div>
 
@@ -118,11 +118,11 @@ export default function ValuePropositionSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-16 hover:cursor-pointer"
         >
           <div className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-gradient-to-r from-orange-100 to-green-100 border border-orange-200">
-            <span className="text-sm font-medium text-gray-700">
-              Ready to revolutionize group investing?
+            <span className="text-sm font-medium text-orange-500">
+              Listo para revolucionar tus inversiones grupales?
             </span>
             <motion.div
               animate={{ x: [0, 5, 0] }}

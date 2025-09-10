@@ -47,13 +47,13 @@ export default function HeroSection() {
               <span className="font-bold text-black">CheMango</span>
             </div>
             <div className="hidden md:flex items-center gap-6 text-sm font-medium text-[#333333]">
-              <button className="hover:text-black transition-colors">Why us</button>
-              <button className="hover:text-black transition-colors">Opportunities</button>
-              <button className="hover:text-black transition-colors">Features</button>
+              <button className="hover:text-black transition-colors">Nosotros</button>
+              <button className="hover:text-black transition-colors">Oportunidades</button>
+              <button className="hover:text-black transition-colors">Características</button>
             </div>
             <div className="hidden sm:flex items-center gap-3">
               <button className="bg-gradient-to-r from-[#FFA94D] to-[#6ABF4B] text-white px-4 py-2 rounded-full hover:scale-105 transition-all duration-200 text-sm font-bold shadow-md hover:shadow-lg">
-                Try it out!
+                Probalo!
               </button>
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function HeroSection() {
             className="text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl mx-auto font-medium"
             style={{
               color: '#454545',
-              textShadow: '0 1px 2px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.1)'
+              // textShadow: '0 1px 2px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.1)'
             }}
           >
             Acompañado se llega más lejos. Con CheMango, alcanzá tu metas 
@@ -143,7 +143,7 @@ export default function HeroSection() {
               }}
             >
               <Play className="w-5 h-5" />
-              Launch App
+              Empezar
             </motion.button>
             
             <motion.button
@@ -151,7 +151,7 @@ export default function HeroSection() {
               whileTap={{ scale: 0.95 }}
               className="bg-white/80 backdrop-blur-lg border border-gray-200/50 text-black font-semibold text-lg px-8 py-4 rounded-full hover:bg-white/90 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
             >
-              See Docs
+              White paper
             </motion.button>
           </motion.div>
 

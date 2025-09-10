@@ -90,7 +90,7 @@ CheMango DeFi is a playful, trustworthy, and finance-oriented web app for collab
 
 **When generating or changing code, Claude must:**
 
-1. **Consult both `@context/style-guide.md`,s `@context/landing-page-design.md` and `@context/design-principles.md` before any code change.**
+1. **Consult both `@context/style-guide.md`,s `@context/landing-page-design.md`, `@context/framework-guideline.md`, `@context/seo-guideline.md` and `@context/design-principles.md` before any code change.**
 2. **Preserve the playful, trustworthy, and finance-oriented brand tone.**
 3. **Never break the visual or UX consistency described above.**
 4. **Always use the correct color palette, typography, and spacing.**
