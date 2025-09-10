@@ -100,6 +100,7 @@ CheMango DeFi is a playful, trustworthy, and finance-oriented web app for collab
 8. **Never hardcode content that should be configurable or translatable.**
 9. **Run and pass lint, type, and accessibility checks before merging.**
 10. **If unsure, default to the most conservative, accessible, and maintainable solution.**
+11. **Ensure all generated copy for the site is in Spanish.**
 
 ---
 
