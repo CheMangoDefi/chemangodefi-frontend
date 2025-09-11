@@ -14,8 +14,8 @@ export default function Home() {
       <HeroSection />
       <ValuePropositionSection />
       <HowItWorksSection />
-      <MarketOpportunitySection />
       <StrategiesSection />
+      <MarketOpportunitySection />
       <UseCasesSection />
       <SecuritySection />
       <CTASection />
