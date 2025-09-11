@@ -1,51 +1,57 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ShieldCheckIcon, CogIcon, ArrowTrendingUpIcon, UsersIcon } from '@heroicons/react/24/outline';
+import { motion, Variants } from 'framer-motion';
+import Image from 'next/image';
 
 export default function ValuePropositionSection() {
   const features = [
     {
-      icon: ShieldCheckIcon,
+      image: "/character_1.png",
       title: "Seguridad de grado militar",
-      description: "Wallets multisig y smart contracts auditados protejen tus inversiones con la más alta seguridad.",
-      gradient: "from-orange-500 to-amber-400"
+      description: "Wallets multisig y smart contracts auditados protegen tus inversiones con la más alta seguridad.",
+      gradient: "from-orange-500 to-amber-400",
+      position: "left"
     },
     {
-      icon: UsersIcon,
+      image: "/character_2.png",
       title: "Decisiones en conjunto",
-      description: "Flujos de aprobación claros aeguran que cada miembro tenga voz en las deciciones financieras.",
-      gradient: "from-green-500 to-emerald-400"
+      description: "Flujos de aprobación claros aseguran que cada miembro tenga voz en las decisiones financieras.",
+      gradient: "from-green-500 to-emerald-400",
+      position: "right"
     },
     {
-      icon: CogIcon,
+      image: "/character_3.png",
       title: "Automatización inteligente",
       description: "Estrategias inteligentes manejan los procesos complejos para que te enfoques en lo que importa - hacer crecer tu plata juntos.",
-      gradient: "from-green-500 to-emerald-400"
+      gradient: "from-orange-500 to-amber-400",
+      position: "left"
     },
     {
-      icon: ArrowTrendingUpIcon,
+      image: "/character_4.png",
       title: "Retornos optimizados",
       description: "Estrategias DeFi avanzadas maximizan tus retornos con el mínimo esfuerzo y la máxima transparencia para el grupo completo.",
-      gradient: "from-orange-500 to-amber-400"
+      gradient: "from-green-500 to-emerald-400",
+      position: "right"
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-        when: "beforeChildren"
-      }
+  const floatingAnimation = {
+    y: [0, -10, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut" as const
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 }
+  const imageVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 }
+  };
+
+  const textVariants: Variants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0 }
   };
 
   return (
@@ -75,42 +81,79 @@ export default function ValuePropositionSection() {
           </p>
         </motion.div>
 
-        {/* Feature Cards Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
-        >
+        {/* Features with Character Images */}
+        <div className="space-y-24 lg:space-y-32">
           {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="group relative"
-            >
-              {/* Card */}
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 hover:border-orange-200/50">
-                {/* Icon with gradient background */}
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.gradient} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <feature.icon className="w-8 h-8 text-white" />
+            <div key={index} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Image Column */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={imageVariants}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className={`relative ${
+                  feature.position === 'right' ? 'lg:order-2' : 'lg:order-1'
+                }`}
+              >
+                <div className="relative">
+                  {/* Floating background gradient */}
+                  <motion.div
+                    animate={floatingAnimation}
+                    className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} rounded-3xl blur-3xl opacity-20 scale-110`}
+                  />
+                  
+                  {/* Character Image */}
+                  <motion.div
+                    animate={floatingAnimation}
+                    className="relative z-10"
+                  >
+                    <Image
+                      src={feature.image}
+                      alt={`Ilustración de ${feature.title} - CheMango DeFi`}
+                      width={400}
+                      height={400}
+                      className="w-full max-w-md mx-auto h-auto object-contain drop-shadow-2xl"
+                      priority={index < 2}
+                    />
+                  </motion.div>
+                  
+                  {/* Decorative elements */}
+                  <div className={`absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r ${feature.gradient} rounded-full opacity-10 blur-xl`} />
+                  <div className={`absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r ${feature.gradient} rounded-full opacity-5 blur-2xl`} />
                 </div>
+              </motion.div>
 
-                {/* Content */}
-                <h3 className="text-2xl font-bold mb-4" style={{ color: '#454545' }}>
-                  {feature.title}
+              {/* Text Column */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={textVariants}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className={`space-y-6 ${
+                  feature.position === 'right' ? 'lg:order-1' : 'lg:order-2'
+                }`}
+              >
+                {/* Title with gradient accent */}
+                <h3 className="text-3xl lg:text-4xl font-bold leading-tight">
+                  <span className="text-[#454545]">{feature.title.split(' ').slice(0, -1).join(' ')}</span>{' '}
+                  <span className={`bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
+                    {feature.title.split(' ').slice(-1)}
+                  </span>
                 </h3>
-                <p className="leading-relaxed" style={{ color: '#454545' }}>
+                
+                {/* Description */}
+                <p className="text-lg lg:text-xl leading-relaxed text-[#454545] max-w-lg">
                   {feature.description}
                 </p>
-
-                {/* Decorative gradient border on hover */}
-                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}></div>
-              </div>
-            </motion.div>
+                
+                {/* Decorative gradient line */}
+                <div className={`w-20 h-1 bg-gradient-to-r ${feature.gradient} rounded-full`} />
+              </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Bottom CTA */}
         <motion.div
