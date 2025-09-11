@@ -1,12 +1,12 @@
 import HeroSection from './components/sections/HeroSection';
 import ValuePropositionSection from './components/sections/ValuePropositionSection';
 import HowItWorksSection from './components/sections/HowItWorksSection';
-import CoreFeaturesSection from './components/sections/CoreFeaturesSection';
 import StrategiesSection from './components/sections/StrategiesSection';
 import UseCasesSection from './components/sections/UseCasesSection';
 import SecuritySection from './components/sections/SecuritySection';
 import CTASection from './components/sections/CTASection';
 import Footer from './components/sections/Footer';
+import MarketOpportunitySection from './components/sections/MarketOpportunitySection';
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
       <HeroSection />
       <ValuePropositionSection />
       <HowItWorksSection />
-      <CoreFeaturesSection />
+      <MarketOpportunitySection />
       <StrategiesSection />
       <UseCasesSection />
       <SecuritySection />

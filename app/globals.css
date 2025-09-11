@@ -37,6 +37,29 @@
   --forest-800: #1a2f1a;
   --forest-900: #0f1d0f;
   
+  /* Mango brand colors (CheMango DeFi primary palette) */
+  --mango-50: #fff8f0;
+  --mango-100: #ffedd5;
+  --mango-200: #fed7aa;
+  --mango-300: #fdba74;
+  --mango-400: #FFA94D;
+  --mango-500: #f97316;
+  --mango-600: #ea580c;
+  --mango-700: #c2410c;
+  --mango-800: #9a3412;
+  --mango-900: #7c2d12;
+
+  --mango-green-50: #f0fdf4;
+  --mango-green-100: #dcfce7;
+  --mango-green-200: #bbf7d0;
+  --mango-green-300: #86efac;
+  --mango-green-400: #6ABF4B;
+  --mango-green-500: #22c55e;
+  --mango-green-600: #16a34a;
+  --mango-green-700: #15803d;
+  --mango-green-800: #166534;
+  --mango-green-900: #14532d;
+  
   /* Neutral grays */
   --gray-50: #fafafa;
   --gray-100: #f5f5f5;
