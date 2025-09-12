@@ -55,7 +55,7 @@ export default function ValuePropositionSection() {
   };
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="nosotros" className="py-24 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-25 to-green-50"></div>
       

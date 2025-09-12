@@ -92,7 +92,7 @@ export default function MarketOpportunitySection() {
   };
 
   return (
-    <section className="py-24 bg-[#1f1f1f] srelative overflow-hidden">
+    <section id="oportunidades" className="py-24 bg-[#1f1f1f] srelative overflow-hidden">
       {/* Subtle background elements following style guide */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-[#FFA94D] to-transparent rounded-full blur-3xl" />

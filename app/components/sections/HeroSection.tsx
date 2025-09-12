@@ -3,10 +3,43 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, DollarSign, Play } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function HeroSection() {
+  const [email, setEmail] = useState('');
+  const [isValid, setIsValid] = useState(true);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const valid = validateEmail(email);
+    setIsValid(valid);
+    
+    if (valid) {
+      // Handle successful email submission here
+      console.log('Email submitted:', email);
+      // You can add API call or form submission logic here
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (!isValid) setIsValid(true); // Reset validation state when user starts typing
+  };
+
   return (
-    <section className="relative overflow-hidden min-h-screen">
+    <section id="inicio" className="relative overflow-hidden min-h-screen">
       {/* High-quality background image */}
       <div className="absolute inset-0">
         <Image
@@ -32,7 +65,10 @@ export default function HeroSection() {
       >
         <div className="bg-white/80 backdrop-blur-lg border border-gray-200/50 rounded-full px-8 py-4 shadow-lg">
           <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2">
+            <button 
+              onClick={() => scrollToSection('inicio')} 
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+            >
               <div className="w-8 h-8 relative">
                 <Image
                   src="/logo.png"
@@ -45,11 +81,26 @@ export default function HeroSection() {
                 />
               </div>
               <span className="font-bold text-black">CheMango</span>
-            </div>
+            </button>
             <div className="hidden md:flex items-center gap-6 text-sm font-medium text-[#333333]">
-              <button className="hover:text-black transition-colors">Nosotros</button>
-              <button className="hover:text-black transition-colors">Oportunidades</button>
-              <button className="hover:text-black transition-colors">Características</button>
+              <button 
+                onClick={() => scrollToSection('nosotros')} 
+                className="hover:text-black transition-colors cursor-pointer"
+              >
+                Nosotros
+              </button>
+              <button 
+                onClick={() => scrollToSection('oportunidades')} 
+                className="hover:text-black transition-colors cursor-pointer"
+              >
+                Oportunidades
+              </button>
+              <button 
+                onClick={() => scrollToSection('caracteristicas')} 
+                className="hover:text-black transition-colors cursor-pointer"
+              >
+                Características
+              </button>
             </div>
             <div className="hidden sm:flex items-center gap-3">
               <button className="bg-gradient-to-r from-[#FFA94D] to-[#6ABF4B] text-white px-4 py-2 rounded-full hover:scale-105 transition-all duration-200 text-sm font-bold shadow-md hover:shadow-lg">
@@ -127,32 +178,65 @@ export default function HeroSection() {
             grupales de manera segura y efectiva.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* Email signup form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex justify-center"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-[#FFA94D] to-[#6ABF4B] text-white font-bold text-lg px-8 py-4 rounded-full hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
-              style={{
-                textShadow: '0 1px 2px rgba(0,0,0,0.3)'
-              }}
+            <motion.form
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 1.2 }}
+              onSubmit={handleSubmit}
+              className="w-full max-w-md"
             >
-              <Play className="w-5 h-5" />
-              Empezar
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white/80 backdrop-blur-lg border border-gray-200/50 text-black font-semibold text-lg px-8 py-4 rounded-full hover:bg-white/90 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg"
-            >
-              White paper
-            </motion.button>
+              <div className="relative">
+                <motion.input
+                  whileFocus={{ scale: 1.02 }}
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  placeholder="Ingresá tu email"
+                  className={`w-full px-6 py-5 pr-32 text-lg text-[#454545] rounded-full bg-white/95 backdrop-blur-lg border-2 transition-all duration-300 focus:outline-none focus:ring-0 shadow-xl ${
+                    isValid 
+                      ? 'border-gray-200/50 focus:border-[#FFA94D]' 
+                      : 'border-red-400 focus:border-red-500'
+                  }`}
+                  required
+                  aria-label="Ingresa tu email para unirte a la lista de espera"
+                />
+                
+                <motion.button
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 10px 25px rgba(255, 169, 77, 0.4)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  type="submit"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#FFA94D] to-[#6ABF4B] text-white font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
+                  style={{
+                    textShadow: '0 1px 2px rgba(0,0,0,0.3)'
+                  }}
+                  aria-label="Enviar email para unirse a la lista de espera"
+                >
+                  Sumarme
+                  <ArrowRight className="w-4 h-4" />
+                </motion.button>
+              </div>
+              
+              {/* Error message */}
+              {!isValid && (
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-red-500 text-sm mt-2 text-center font-medium"
+                >
+                  Por favor ingresa un email válido
+                </motion.p>
+              )}
+            </motion.form>
           </motion.div>
 
           </div>

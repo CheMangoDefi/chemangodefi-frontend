@@ -17,7 +17,7 @@ export default function Home() {
       <StrategiesSection />
       <MarketOpportunitySection />
       <UseCasesSection />
-      <SecuritySection />
+      {/* <SecuritySection /> */}
       <CTASection />
       <Footer />
     </div>
