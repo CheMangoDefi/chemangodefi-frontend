@@ -1,13 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, DollarSign, Play } from 'lucide-react';
+import { ArrowRight, DollarSign, Play, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
+import { subscribeToNewsletter } from '@/app/actions/newsletter';
+import SuccessDialog from '@/app/components/ui/SuccessDialog';
 
 export default function HeroSection() {
   const [email, setEmail] = useState('');
   const [isValid, setIsValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -21,21 +26,46 @@ export default function HeroSection() {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const valid = validateEmail(email);
     setIsValid(valid);
-    
-    if (valid) {
-      // Handle successful email submission here
-      console.log('Email submitted:', email);
-      // You can add API call or form submission logic here
+    setErrorMessage('');
+
+    if (!valid) {
+      setErrorMessage('Por favor ingresa un email válido');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const result = await subscribeToNewsletter(email, 'CheMango Website Hero');
+
+      if (result.success) {
+        // Show success dialog
+        setShowSuccessDialog(true);
+        // Clear the email input
+        setEmail('');
+      } else {
+        // Show error message
+        setIsValid(false);
+        setErrorMessage(result.error || 'Hubo un error al procesar tu suscripción');
+      }
+    } catch (error) {
+      // Handle unexpected errors
+      setIsValid(false);
+      setErrorMessage('Hubo un error inesperado. Por favor intenta nuevamente.');
+      console.error('Newsletter subscription error:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     if (!isValid) setIsValid(true); // Reset validation state when user starts typing
+    if (errorMessage) setErrorMessage(''); // Clear error message when user starts typing
   };
 
   return (
@@ -160,7 +190,7 @@ export default function HeroSection() {
               textShadow: '6px 6px 0px rgba(0,0,0,1), -1px -1px 0px rgba(0,0,0,1), 1px -1px 0px rgba(0,0,0,1), -1px 1px 0px rgba(0,0,0,1), 0 4px 8px rgba(0,0,0,0.3)'
             }}
           >
-            CheMango DeFi
+            CheMango
           </motion.h1>
 
           {/* Subtitle */}
@@ -209,35 +239,51 @@ export default function HeroSection() {
                 />
                 
                 <motion.button
-                  whileHover={{ 
-                    scale: 1.05,
-                    boxShadow: "0 10px 25px rgba(255, 169, 77, 0.4)"
+                  whileHover={{
+                    scale: isLoading ? 1 : 1.05,
+                    boxShadow: isLoading ? undefined : "0 10px 25px rgba(255, 169, 77, 0.4)"
                   }}
-                  whileTap={{ scale: 0.95 }}
+                  whileTap={{ scale: isLoading ? 1 : 0.95 }}
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#FFA94D] to-[#6ABF4B] text-white font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
+                  disabled={isLoading}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#FFA94D] to-[#6ABF4B] text-white font-bold px-6 py-3 rounded-full hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   style={{
                     textShadow: '0 1px 2px rgba(0,0,0,0.3)'
                   }}
                   aria-label="Enviar email para unirse a la lista de espera"
                 >
-                  Sumarme
-                  <ArrowRight className="w-4 h-4" />
+                  {isLoading ? (
+                    <>
+                      Enviando...
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    </>
+                  ) : (
+                    <>
+                      Sumarme
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
                 </motion.button>
               </div>
               
               {/* Error message */}
-              {!isValid && (
+              {(!isValid || errorMessage) && (
                 <motion.p
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-red-500 text-sm mt-2 text-center font-medium"
                 >
-                  Por favor ingresa un email válido
+                  {errorMessage || 'Por favor ingresa un email válido'}
                 </motion.p>
               )}
             </motion.form>
           </motion.div>
+
+          {/* Success Dialog */}
+          <SuccessDialog
+            isOpen={showSuccessDialog}
+            onClose={() => setShowSuccessDialog(false)}
+          />
 
           </div>
         </div>
