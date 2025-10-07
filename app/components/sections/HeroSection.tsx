@@ -101,7 +101,7 @@ export default function HeroSection() {
             >
               <div className="w-8 h-8 relative">
                 <Image
-                  src="/logo.png"
+                  src="/logo2.png"
                   alt="CheMango DeFi"
                   width={64}
                   height={64}
@@ -166,13 +166,12 @@ export default function HeroSection() {
               className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 relative"
             >
               <Image
-                src="/logo.png"
+                src="/logo2.png"
                 alt="CheMango Mascot - Happy mango holding cash"
                 width={512}
                 height={512}
                 className="object-contain drop-shadow-2xl"
                 priority
-                quality={100}
                 sizes="(max-width: 640px) 192px, (max-width: 1024px) 224px, 256px"
                 placeholder="blur"
                 blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjU2IiBoZWlnaHQ9IjI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM2QUJGNEJCJSB8MB8gMjAlIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0ZGQTk0REFBJTAiIC8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGNkIzNTUwJSIgLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+Cjwvc3ZnPg=="
