@@ -1,6 +1,5 @@
 'use server';
 
-import { subscribeViaLoops } from './loops';
 import { subscribeViaGoogleSheets } from './google-sheets';
 
 // Re-export types for backwards compatibility
@@ -45,28 +44,24 @@ export async function subscribeToNewsletter(
       // Primary: Always save to Google Sheets first (as backup)
       const sheetsResult = await subscribeViaGoogleSheets(email, source);
 
-      // Secondary: Try to save to Loops (don't fail if Loops is down)
-      if (process.env.LOOPS_API_KEY) {
-        try {
-          await subscribeViaLoops(email, source);
-          console.log('[Newsletter] Successfully saved to both Google Sheets and Loops');
-        } catch (loopsError) {
-          console.warn('[Newsletter] Google Sheets succeeded but Loops failed:', loopsError);
-          // Don't fail the request - we have the data in Sheets
-        }
-      }
+      // // Secondary: Try to save to Loops (don't fail if Loops is down)
+      // if (process.env.LOOPS_API_KEY) {
+      //   try {
+      //     await subscribeViaLoops(email, source);
+      //     console.log('[Newsletter] Successfully saved to both Google Sheets and Loops');
+      //   } catch (loopsError) {
+      //     console.warn('[Newsletter] Google Sheets succeeded but Loops failed:', loopsError);
+      //     // Don't fail the request - we have the data in Sheets
+      //   }
+      // }
 
       return sheetsResult;
     }
 
-    // SINGLE PROVIDER MODE: Use either Loops or Google Sheets
-    if (useLoops) {
-      console.log('[Newsletter] Using Loops.so provider');
-      return await subscribeViaLoops(email, source);
-    } else {
-      console.log('[Newsletter] Using Google Sheets provider');
-      return await subscribeViaGoogleSheets(email, source);
-    }
+
+    console.log('[Newsletter] Using Google Sheets provider');
+    return await subscribeViaGoogleSheets(email, source);
+    
   } catch (error) {
     console.error('[Newsletter] Subscription error:', error);
     return {
