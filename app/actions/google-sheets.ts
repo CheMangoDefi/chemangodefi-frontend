@@ -13,27 +13,44 @@ export interface NewsletterResponse {
 /**
  * Initialize Google Sheets authentication with service account credentials
  * Uses environment variables for secure credential management
+ *
+ * IMPORTANT: This function handles multiple private key formats to ensure
+ * compatibility with both local development (.env.local) and production (Vercel)
  */
 async function getGoogleSheetsAuth() {
   const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL;
-  const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
+  let privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
 
   if (!clientEmail || !privateKey) {
     throw new Error('Google Sheets credentials not configured');
   }
 
+  // Remove surrounding quotes if present (happens when copy-pasting with quotes)
+  privateKey = privateKey.replace(/^["']|["']$/g, '');
+
   // Replace literal \n in the private key with actual newlines
+  // This handles the case where Vercel stores "\n" as literal string characters
   const formattedPrivateKey = privateKey.replace(/\\n/g, '\n');
 
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: clientEmail,
-      private_key: formattedPrivateKey,
-    },
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-  });
+  try {
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: clientEmail,
+        private_key: formattedPrivateKey,
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
 
-  return auth;
+    return auth;
+  } catch (error) {
+    // If authentication fails, log helpful debugging info (without exposing the actual key)
+    console.error('Failed to initialize Google Sheets auth. Key format check:');
+    console.error('- Has BEGIN marker:', formattedPrivateKey.includes('BEGIN PRIVATE KEY'));
+    console.error('- Has END marker:', formattedPrivateKey.includes('END PRIVATE KEY'));
+    console.error('- Has newlines:', formattedPrivateKey.includes('\n'));
+    console.error('- Key length:', formattedPrivateKey.length);
+    throw error;
+  }
 }
 
 /**
